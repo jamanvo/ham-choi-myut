@@ -37,15 +37,20 @@ class BettingSlot extends Component {
 				<option value={p} key={index}>{p}</option>
 			)
 		)
+        const input_style = {
+            padding: '5px',
+            borderRadius: '10px',
+            fontSize: '1.1em',
+        }
 
 		return (
 			<div>
-				<select onChange={(e) => this.onChangeValue(e, 'player')}>
+				<select style={input_style} onChange={(e) => this.onChangeValue(e, 'player')}>
 					{options}
 				</select>
-				<input type="text" value={name} onChange={(e) => this.onChangeValue(e, 'name')} />
-				<input type="number" value={bet} onChange={(e) => this.onChangeValue(e, 'bet')} />
-				<button onClick={() => this.onClickAddBetter()}>추가</button>
+				<input type="text" style={input_style} value={name} onChange={(e) => this.onChangeValue(e, 'name')} />
+				<input type="number" style={input_style} value={bet} onChange={(e) => this.onChangeValue(e, 'bet')} />
+				<button style={input_style} onClick={() => this.onClickAddBetter()}>추가</button>
 			</div>
 		)
 	}

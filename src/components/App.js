@@ -89,8 +89,14 @@ class App extends Component {
 
     render() {
         const {better_list, player_bet, total_bet} = this.state;
+        const main_style = {
+            textAlign: 'center',
+            fontSize: '1.5em',
+        };
+
         return (
-            <div>
+            <div style={main_style}>
+                <h2>천하 제일 <strong>햄최몇</strong> 대회</h2>
                 <BettingSlot
                     players={this.players} 
                     addNewBetter={this.addNewBetter}
