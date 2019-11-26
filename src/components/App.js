@@ -9,19 +9,19 @@ class App extends Component {
 
         this.state = {  
             better_list: {
-                '학짱': [],
-                '꼬막': [],
-                '민두': [],
+                '문병학': [],
+                '강주열': [],
+                '신민용': [],
             },            
             player_bet: {
-                '학짱': 0,
-                '꼬막': 0,
-                '민두': 0, 
+                '문병학': 0,
+                '강주열': 0,
+                '신민용': 0, 
             },
             total_bet: 0,
         };
 
-        this.players = ['학짱', '꼬막', '민두'];
+        this.players = ['문병학', '강주열', '신민용'];
 
         this.addNewBetter = this.addNewBetter.bind(this);
         this.removeBetter = this.removeBetter.bind(this);
@@ -30,6 +30,14 @@ class App extends Component {
     addNewBetter(player_key, data) {
         const {better_list, player_bet, total_bet} = this.state;
         const selected_player = better_list[player_key];
+        if (parseInt(data.bet) < 1000) {
+            alert('쫄리니?');
+            return false;
+        }
+        if (parseInt(data.bet) > 10000) {
+            alert('과도한 도박은 패가망신의 지름길입니다.');
+            return false;
+        }
         selected_player.push(data);
         const updated = {
             ...better_list,
@@ -61,13 +69,13 @@ class App extends Component {
         ];
         
         const selected_bet = player_bet[player_key];
-        const updated_player_bet = selected_bet + parseInt(selected_player[index].bet);
+        const updated_player_bet = selected_bet - parseInt(selected_player[index].bet);
         const updated_bet = {
             ...player_bet,
             [player_key]: updated_player_bet,
         };
 
-        const total_updated = total_bet + parseInt(selected_player[index].bet);
+        const total_updated = total_bet - parseInt(selected_player[index].bet);
 
         this.setState({
             better_list: {
@@ -87,15 +95,17 @@ class App extends Component {
                     players={this.players} 
                     addNewBetter={this.addNewBetter}
                 />
-                <PlayerList
-                    better_list={better_list}
-                    players={this.players}
-                    removeBetter={this.removeBetter}
-                />
                 <Dashboard
                     player_bet={player_bet}
                     total_bet={total_bet}
                     players={this.players}
+                />
+                <PlayerList
+                    better_list={better_list}
+                    players={this.players}
+                    total_bet={total_bet}
+                    player_bet={player_bet}
+                    removeBetter={this.removeBetter}
                 />
             </div>
         )

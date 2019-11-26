@@ -9,14 +9,15 @@ class Better extends Component {
 	}
 
 	render() {
-		const {data} = this.props;
+		const {data, player_bet, total_bet} = this.props;
 		const button_style = {
 			marginLeft: '5px',
 		};
+        const rate = (parseInt(data.bet) / player_bet) * total_bet;
 
 		return (
 			<div className="better">
-				이름: {data.name}, 베팅금액: {parseInt(data.bet)}
+				이름: {data.name}, 베팅금액: {parseInt(data.bet).toLocaleString()}, 예상배당금: {rate} 
 				<button onClick={() => this.onClickRemoveBetter()} style={button_style}>베팅 취소</button>
 			</div>
 		)
